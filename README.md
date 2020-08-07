@@ -51,7 +51,7 @@
 
 ### Maven version:
 
-```maven
+```xml
 	<repositories>
 		<repository>
 		    <id>jitpack.io</id>
@@ -60,7 +60,7 @@
 	</repositories>
 ```
 
-```maven
+```xml
 	<dependency>
 	    <groupId>com.github.Creative-Motion-Apps</groupId>
 	    <artifactId>kotlin-ecg-detectors</artifactId>
