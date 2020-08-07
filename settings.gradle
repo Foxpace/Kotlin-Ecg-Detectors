@@ -1,0 +1,3 @@
+include ':kotlin_ecg_detectors'
+include ':app'
+rootProject.name = "EcgDetectors"
