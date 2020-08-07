@@ -58,7 +58,6 @@
 		    <url>https://jitpack.io</url>
 		</repository>
 	</repositories>
-
 ```
 
 ```maven
