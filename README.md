@@ -13,7 +13,7 @@
 * **implementation of the FIR, IIR filters and other utilities are handled by [jDSP library for digital signal processing in Java](https://github.com/psambit9791/jDSP)**
 * results of the algorithms may vary, due to the rounding errors and implementation of the filters 
 * **missing swtDetector** due to the lack of appropriate wavelet decomposition algorithm - maybe will be added later
-* HRV variability and testing is available
+* HRV variability and testing is not available
 * real-time detectors use the same procedures customised to work with real-time samples / in for cycle
 
 ### Available offline detectors:
