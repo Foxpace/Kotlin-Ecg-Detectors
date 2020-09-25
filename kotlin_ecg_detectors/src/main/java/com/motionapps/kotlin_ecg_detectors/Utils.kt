@@ -24,6 +24,16 @@ object Utils {
         return value
     }
 
+    fun searchForMaximumInRangeArray(doubleArray: ArrayList<Double>, from: Int, to: Int): Double {
+        var value = Double.NEGATIVE_INFINITY
+        for (i in from..to) {
+            if (doubleArray[i] > value) {
+                value = doubleArray[i]
+            }
+        }
+        return value
+    }
+
     fun positiveFirstDifference(array: DoubleArray): DoubleArray {
         val arrayDif = DoubleArray(array.size)
         for (i in 1 until array.size) {
@@ -98,6 +108,15 @@ object Utils {
     }
 
     fun valuesOfIndexes(array: DoubleArray, indexes: IntArray): DoubleArray{
+        val values = DoubleArray(indexes.size)
+        var counter = 0
+        for(i in indexes){
+            values[counter++] = array[i]
+        }
+        return values
+    }
+
+    fun valuesOfIndexesList(array: ArrayList<Double>, indexes: IntArray): DoubleArray{
         val values = DoubleArray(indexes.size)
         var counter = 0
         for(i in indexes){

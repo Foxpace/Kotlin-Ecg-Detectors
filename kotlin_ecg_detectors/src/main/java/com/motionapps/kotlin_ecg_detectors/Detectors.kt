@@ -167,8 +167,7 @@ class Detectors(private val fs: Double) {
         var M = 0.0
         var newM5 = 0.0
         val MM: LinkedList<Double> = LinkedList()
-        val Mslope =
-            UtilMethods.reverse(UtilMethods.arange(0.6, 1.0, 0.4 / (ms1200 - ms200).toDouble()))
+        val Mslope = UtilMethods.reverse(UtilMethods.arange(0.6, 1.0, 0.4 / (ms1200 - ms200).toDouble()))
 
         var F = 0.0
 
@@ -258,7 +257,7 @@ class Detectors(private val fs: Double) {
     fun engzeeDetector(unfilteredSignal: DoubleArray, threshold: Double = 0.0085): Array<Int> {
 
 
-
+        // band-stop 48 - 52 Hz
         val butter = Butterworth(unfilteredSignal, fs)
         var filteredSignal = butter.band_stop_filter(4, 48.0, 52.0)
 
@@ -294,7 +293,7 @@ class Detectors(private val fs: Double) {
         for (i in filteredSignal.indices) {
 
             if (i < 5 * fs) {
-                M = 0.6 * searchForMaximumInRange(filteredSignal, 0, i + 1)
+                M = 0.6 * searchForMaximumInRange(filteredSignal, 0, i)
                 MM.add(M)
                 if (MM.size > 5) {
                     MM.removeFirst()
@@ -349,8 +348,8 @@ class Detectors(private val fs: Double) {
 
             if (counter > negThreshold) {
                 val unfilteredSection = unfilteredSignal.copyOfRange(thiList.last - negThreshold, i)
-                unfilteredSection.max()?.let {
-                    rPeaks.add(unfilteredSection.indexOf(it) + thiList.last - negThreshold)
+                unfilteredSection.maxOrNull()?.let {
+                    rPeaks.add(unfilteredSection.indexOfFirst { it == it } + thiList.last - negThreshold + (0.03 * fs).toInt())
                 }
 
                 counter = 0
@@ -421,7 +420,7 @@ class Detectors(private val fs: Double) {
 
                         if (RRMissed != 0) {
                             if (signalPeaks.last - signalPeaks[signalPeaks.size - 2] > RRMissed) {
-                                val missedSectionPeaks = LinkedList<Int>(
+                                val missedSectionPeaks = LinkedList(
                                     peaks.subList(
                                         indexes[indexes.size - 2]+1,
                                         indexes.last
@@ -440,16 +439,13 @@ class Detectors(private val fs: Double) {
 
                                 if (missedSectionPeaks2.size > 0) {
                                     val o = valuesOfIndexes(detection, missedSectionPeaks2.toIntArray())
-                                    o.max()?.let {
-                                        val missedPeak = missedSectionPeaks2[o.indexOf(it)]
+                                    o.maxOrNull()?.let {
+                                        val missedPeak = missedSectionPeaks2[o.indexOfFirst { it == it }]
                                         missedPeaks.add(missedPeak)
                                         signalPeaks.add(signalPeaks.last)
                                         signalPeaks[signalPeaks.size - 2] = missedPeak
                                     }
-
-
                                 }
-
                             }
                         }
                     } else {
@@ -462,7 +458,7 @@ class Detectors(private val fs: Double) {
                     thresholdI2 = 0.5 * thresholdI1
 
                     if (signalPeaks.size > 8) {
-                        val array = LinkedList<Int>(
+                        val array = LinkedList(
                             signalPeaks.subList(
                                 signalPeaks.size - 9,
                                 signalPeaks.size - 1
@@ -524,8 +520,8 @@ class Detectors(private val fs: Double) {
                 val end = i-1
                 if( end - start > (0.08*fs).toInt()){
                     val partOfSignal  = filteredSignal.copyOfRange(start, end+1)
-                    partOfSignal.max()?.let {
-                        val detection = partOfSignal.indexOf(it)+start
+                    partOfSignal.maxOrNull()?.let {
+                        val detection = partOfSignal.indexOfFirst { it == it } +start
                         if(QRS.isNotEmpty()){
                             if(detection - QRS.last > (0.3*fs)){
                                 QRS.add(detection)
