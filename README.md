@@ -3,9 +3,9 @@
 
 **This library is Kotlin translation of [py-ecg-detectors](https://github.com/berndporr/py-ecg-detectors).**
 
-**_This Kotlin library is not created with affiliation to authors of Python version created by Luis Howell and Bernd Porr._**
+**_This Kotlin library is not created with affiliation to authors of Python version created by Luis Howell and Bernd Porr._** 
 
-**_Citation DOI: [10.5281/zenodo.3353396](https://doi.org/10.5281/zenodo.3353396) and license: [GPL-3.0 License](https://github.com/berndporr/py-ecg-detectors) to their work. Great gratitude for their work._** 
+**_Citation DOI: [10.5281/zenodo.3353396](https://doi.org/10.5281/zenodo.3353396) and license: [GPL-3.0 License](https://github.com/berndporr/py-ecg-detectors) to their work.  Great gratitude for their work._** [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Changes:
 
@@ -35,6 +35,8 @@
 
 ### Gradle version:
 
+[![](https://jitpack.io/v/Creative-Motion-Apps/Kotlin-Ecg-Detectors.svg)](https://jitpack.io/#Creative-Motion-Apps/Kotlin-Ecg-Detectors)
+
 **Jitpack.io dependency to 'build.gradle'**
 
 ```groovy
@@ -49,7 +51,7 @@
 
 ```groovy
 	dependencies {
-	        implementation 'com.github.Creative-Motion-Apps:kotlin-ecg-detectors:0.0.1'
+	        implementation 'com.github.Creative-Motion-Apps:Kotlin-Ecg-Detectors:0.0.2'
 	}
 
 ```
@@ -68,8 +70,8 @@
 ```xml
 	<dependency>
 	    <groupId>com.github.Creative-Motion-Apps</groupId>
-	    <artifactId>kotlin-ecg-detectors</artifactId>
-	    <version>0.0.1</version>
+	    <artifactId>Kotlin-Ecg-Detectors</artifactId>
+	    <version>0.0.2</version>
 	</dependency>
 ```
 
@@ -102,9 +104,9 @@
 # Third parties and thanks goes to:
 
 
-* **[jDSP](https://github.com/psambit9791/jDSP)** **- library focused on signal processing, filtration and manipulation in Java. Functionality is similar to scipy-signal package for Python. Library is created by *Sambit Paul*.** **_DOI: [10.5281/zenodo.3951042](https://doi.org/10.5281/zenodo.3951042). Library is licensed under MIT license._**
-* **[iirj](https://github.com/berndporr/iirj)** **- IIR filters written in Java, which is also used by jDSP. Library is created by *Bernd Porr*, who is also contributor to py-ecg-detectors**. **_Library is licensed under Apache-2.0 License_**.
+* **[jDSP](https://github.com/psambit9791/jDSP)** **- library focused on signal processing, filtration and manipulation in Java. Functionality is similar to scipy-signal package for Python. Library is created by *Sambit Paul*.** **_DOI: [10.5281/zenodo.3951042](https://doi.org/10.5281/zenodo.3951042). Library is licensed under MIT license._** [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+* **[iirj](https://github.com/berndporr/iirj)** **- IIR filters written in Java, which is also used by jDSP. Library is created by *Bernd Porr*, who is also contributor to py-ecg-detectors**. **_Library is licensed under Apache-2.0 License_**. [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # License:
 
-Licensed under the same license as [py-ecg-detectors](https://github.com/berndporr/py-ecg-detectors) - GPL-3.0 License. For more information visit LICENSE file in depository.
+Licensed under the same license as [py-ecg-detectors](https://github.com/berndporr/py-ecg-detectors) - GPL-3.0 License. For more information visit LICENSE file in depository. [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
