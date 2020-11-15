@@ -15,4 +15,8 @@ class MWA(private val size: Int): HelperInterface{
             result
         }
     }
+
+    override fun reset() {
+        values.clear()
+    }
 }

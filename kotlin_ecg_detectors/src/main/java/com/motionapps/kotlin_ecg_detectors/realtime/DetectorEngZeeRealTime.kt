@@ -6,10 +6,8 @@ import com.motionapps.kotlin_ecg_detectors.handlers.Convolution
 import com.motionapps.kotlin_ecg_detectors.handlers.Filters
 import com.motionapps.kotlin_ecg_detectors.handlers.HelperInterface
 import com.motionapps.kotlin_ecg_detectors.handlers.MoveDifference
-import uk.me.berndporr.iirj.Butterworth
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.abs
 
 /**
  * C. Zeelenberg, A single scan algorithm for QRS detection and
@@ -23,7 +21,7 @@ import kotlin.math.abs
 class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDetector(fs) {
 
 
-    private val bandpassFilter = Filters.initBandStopFilter(samplingFrequency, 4, 48.0, 52.0)
+    private val bandStopFilter = Filters.initBandStopFilter(this.fs, 4, 48.0, 52.0)
     private val moveDifference: HelperInterface = MoveDifference(4)
 
     private val kernel = doubleArrayOf(1.0, 4.0, 6.0, 4.0, 1.0)
@@ -42,6 +40,7 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
     private val QRS: LinkedList<Int> = LinkedList()
     private val rPeaks: LinkedList<Int> = LinkedList()
 
+    private var waitCounter: Int = (fs*0.2).toInt();
     private var counter = 0
 
     private val thiList: LinkedList<Int> = LinkedList()
@@ -56,7 +55,7 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
 
     override fun processSample(sample: Double): Int{
         if (!ready) {
-            var filteredSample = bandpassFilter.filter(sample)
+            var filteredSample = bandStopFilter.filter(sample)
             filteredSample = moveDifference.passValue(filteredSample)
 
             if(filteredSample.isNaN()){
@@ -69,11 +68,17 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
                 skipped++
                 return -1
             }
+
+            if(waitCounter-- != 0){
+                skipped++
+                return -1
+            }
+
             ready = true
             return -1
         } else {
 
-            var filteredSample = bandpassFilter.filter(sample)
+            var filteredSample = bandStopFilter.filter(sample)
             filteredSample = moveDifference.passValue(filteredSample)
             filteredSample = conv.passValue(filteredSample)
 
@@ -81,7 +86,7 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
             filteredValues.add(filteredSample)
             val i = filteredValues.size - 1
 
-            if (filteredValues.size < 5 * this.samplingFrequency) {
+            if (filteredValues.size < 5 * this.fs) {
                 M = 0.6 * Utils.searchForMaximumInRangeArray(filteredValues, 0, i)
                 MM.add(M)
                 if (MM.size > 5) {
@@ -140,18 +145,39 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
                 unfilteredSection.maxOrNull()?.let {
                     val rPeak = unfilteredSection.indexOf(it) + thiList.last - negThreshold
                     rPeaks.add(rPeak)
+                    counter = 0
+                    thi = false
+                    thf = false
                     return rPeak + skipped
                 }
-
-                counter = 0
-                thi = false
-                thf = false
             }
 
             return -1
         }
     }
 
+    override fun reset() {
+        moveDifference.reset()
+        conv.reset()
+        M = 0.0
+        newM5 = 0.0
+        MM.clear()
 
+        QRS.clear()
+        rPeaks.clear()
+
+        waitCounter = 0
+        counter = 0
+
+        thiList.clear()
+        thi = false
+        thf = false
+
+        unfilteredValues.clear()
+        filteredValues.clear()
+
+        skipped = 0
+        ready = false
+    }
 
 }

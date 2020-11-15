@@ -16,4 +16,8 @@ class Convolution(private val kernel: DoubleArray): HelperInterface {
             Double.NaN
         }
     }
+
+    override fun reset() {
+        values.clear()
+    }
 }

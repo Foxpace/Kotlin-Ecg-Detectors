@@ -92,6 +92,20 @@ class PanPeakDetector(private val fs: Double) : HelperInterface {
 
     }
 
+    override fun reset() {
+        signalPeaks.clear()
+        noisePeaks.clear()
+        SPKI = 0.0
+        NPKI = 0.0
+        thresholdI1 = 0.0
+        thresholdI2 = 0.0
+        RRMissed = 0
+        index = 0
+        indexes.clear()
+        missedPeaks.clear()
+        peaks.clear()
+    }
+
     private fun callAtEnd() {
         thresholdI1 = NPKI + 0.25 * (SPKI - NPKI)
         thresholdI2 = 0.5 * thresholdI1

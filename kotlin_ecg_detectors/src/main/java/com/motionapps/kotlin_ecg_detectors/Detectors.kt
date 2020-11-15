@@ -499,7 +499,7 @@ class Detectors(private val fs: Double) {
         val mwaBeat = MWA(absArray(filteredSignal), window2)
 
         val blocks = DoubleArray(unfilteredSignal.size)
-        val blockHeight: Double = unfilteredSignal.max()!!
+        val blockHeight: Double = unfilteredSignal.maxOrNull()!!
 
         for (i in mwaQrs.indices){
             if(mwaQrs[i] > mwaBeat[i]){

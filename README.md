@@ -99,6 +99,8 @@
             // does not need to be in order for some detectors (sorting required in some cases)
         }
     } 
+    detector.reset() // if something went wrong - this will empty memory in detector
+    // for new configuration create new detector object
 ```
 
 # Third parties and thanks goes to:

@@ -41,4 +41,12 @@ class DetectorPanTompkinsRealTime(fs: Double): RealTimeDetector(fs) {
             panPeakDetector.passValue(filteredSample).toInt() + skipped
         }
     }
+
+    override fun reset() {
+        differenceHandler.reset()
+        mwa.reset()
+        panPeakDetector.reset()
+        skipped = 0
+        ready = false
+    }
 }

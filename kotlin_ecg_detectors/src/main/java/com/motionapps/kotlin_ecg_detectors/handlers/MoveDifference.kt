@@ -15,4 +15,8 @@ class MoveDifference(private val size: Int): HelperInterface {
             Double.NaN
         }
     }
+
+    override fun reset() {
+        values.clear()
+    }
 }
