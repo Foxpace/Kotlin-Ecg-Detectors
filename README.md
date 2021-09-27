@@ -31,6 +31,8 @@
 * Engelse and Zeelenberg detector
 * Pan and Tompkins detector 
 
+### [For C++ implementation go here](https://github.com/Creative-Motion-Apps/Cpp_Ecg_Detectors) 
+
 # Installation:
 
 ### Gradle version:
