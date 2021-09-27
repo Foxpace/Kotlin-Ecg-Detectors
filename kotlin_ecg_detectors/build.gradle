@@ -1,7 +1,6 @@
-apply plugin: 'java-library'
+apply plugin: 'java'
 apply plugin: 'kotlin'
-group = "com.github.Creative-Motion-Apps"
-
+apply plugin: 'maven-publish'
 
 buildscript {
     ext.kotlin_version = '1.5.31'
@@ -29,6 +28,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation('com.github.psambit9791:jdsp:0.8.0'){
         exclude group: 'org.apache.maven.surefire', module: 'common-java5'
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.github.Creative-Motion-Apps'
+            artifactId = 'KotlinEcgDetectors'
+            version = '0.0.4'
+
+            from components.java
+        }
     }
 }
 
