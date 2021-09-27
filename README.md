@@ -37,7 +37,8 @@
 
 ### Gradle version:
 
-[![](https://jitpack.io/v/Creative-Motion-Apps/Kotlin-Ecg-Detectors.svg)](https://jitpack.io/#Creative-Motion-Apps/Kotlin-Ecg-Detectors)
+Use this tag -> [![](https://jitpack.io/v/Foxpace/Kotlin-Ecg-Detectors.svg)](https://jitpack.io/#Foxpace/Kotlin-Ecg-Detectors)
+
 
 **Jitpack.io dependency to 'build.gradle'**
 
@@ -53,7 +54,7 @@
 
 ```groovy
 	dependencies {
-	        implementation 'com.github.Creative-Motion-Apps:Kotlin-Ecg-Detectors:0.0.4'
+	        implementation 'com.github.Foxpace:Kotlin-Ecg-Detectors:Tag'
 	}
 
 ```
@@ -71,9 +72,9 @@
 
 ```xml
 	<dependency>
-	    <groupId>com.github.Creative-Motion-Apps</groupId>
+	    <groupId>com.github.Foxpace</groupId>
 	    <artifactId>Kotlin-Ecg-Detectors</artifactId>
-	    <version>0.0.4</version>
+	    <version>Tag</version>
 	</dependency>
 ```
 
