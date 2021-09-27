@@ -1,7 +1,7 @@
 package com.motionapps.kotlin_ecg_detectors
 
-import com.github.psambit9791.jdsp.UtilMethods
 import com.github.psambit9791.jdsp.filter.Butterworth
+import com.github.psambit9791.jdsp.misc.UtilMethods
 import com.github.psambit9791.jdsp.signal.Convolution
 import com.motionapps.kotlin_ecg_detectors.Utils.MWA
 import com.motionapps.kotlin_ecg_detectors.Utils.absArray
@@ -38,7 +38,7 @@ class Detectors(private val fs: Double) {
 
         // 8 Hz LP and 16 Hz HP filter
         val butterFilter = Butterworth(unfilteredSignal, fs)
-        var filteredSignal: DoubleArray = butterFilter.band_pass_filter(1, 8.0, 16.0)
+        var filteredSignal: DoubleArray = butterFilter.bandPassFilter(1, 8.0, 16.0)
         filteredSignal = positiveFirstDifference(filteredSignal)
 
         // smoothing signal with 80 ms latency
@@ -259,7 +259,7 @@ class Detectors(private val fs: Double) {
 
         // band-stop 48 - 52 Hz
         val butter = Butterworth(unfilteredSignal, fs)
-        var filteredSignal = butter.band_stop_filter(4, 48.0, 52.0)
+        var filteredSignal = butter.bandStopFilter(4, 48.0, 52.0)
 
         filteredSignal = movedDifference(filteredSignal, 4)
 
@@ -371,7 +371,7 @@ class Detectors(private val fs: Double) {
     fun panTompkinsDetector(unfilteredSignal: DoubleArray): Array<Int> {
 
         val butter = Butterworth(unfilteredSignal, fs)
-        var filteredSignal = butter.band_pass_filter(1, 5.0, 15.0)
+        var filteredSignal = butter.bandPassFilter(1, 5.0, 15.0)
         filteredSignal = UtilMethods.diff(filteredSignal)
 
         filteredSignal = pow2Array(filteredSignal)
@@ -490,7 +490,7 @@ class Detectors(private val fs: Double) {
     fun twoAverageDetector(unfilteredSignal: DoubleArray): Array<Int>{
 
         val butter = Butterworth(unfilteredSignal, fs)
-        val filteredSignal = butter.band_pass_filter(2, 8.0, 20.0)
+        val filteredSignal = butter.bandPassFilter(2, 8.0, 20.0)
 
         val window1 = (0.12*fs).toInt()
         val mwaQrs = MWA(absArray(filteredSignal), window1)
@@ -580,7 +580,7 @@ class Detectors(private val fs: Double) {
     fun matchedFilterDetector(unfilteredSignal: DoubleArray, template: DoubleArray): Array<Int>{
 
         val butter = Butterworth(unfilteredSignal, fs)
-        val filteredSignal = butter.band_pass_filter(4, 0.1, 48.0)
+        val filteredSignal = butter.bandPassFilter(4, 0.1, 48.0)
         val reversedTemplate = UtilMethods.reverse(template)
         Convolution(filteredSignal, reversedTemplate).also {
             var detection = it.convolve("same")

@@ -1,6 +1,6 @@
 package com.motionapps.kotlin_ecg_detectors.realtime
 
-import com.github.psambit9791.jdsp.UtilMethods
+import com.github.psambit9791.jdsp.misc.UtilMethods
 import com.motionapps.kotlin_ecg_detectors.Utils
 import com.motionapps.kotlin_ecg_detectors.handlers.Convolution
 import com.motionapps.kotlin_ecg_detectors.handlers.Filters
@@ -40,7 +40,7 @@ class DetectorEngZeeRealTime(fs: Double, threshold: Double = 0.0085): RealTimeDe
     private val QRS: LinkedList<Int> = LinkedList()
     private val rPeaks: LinkedList<Int> = LinkedList()
 
-    private var waitCounter: Int = (fs*0.2).toInt();
+    private var waitCounter: Int = (fs*0.2).toInt()
     private var counter = 0
 
     private val thiList: LinkedList<Int> = LinkedList()

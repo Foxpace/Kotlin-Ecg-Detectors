@@ -51,7 +51,7 @@
 
 ```groovy
 	dependencies {
-	        implementation 'com.github.Creative-Motion-Apps:Kotlin-Ecg-Detectors:0.0.2'
+	        implementation 'com.github.Creative-Motion-Apps:Kotlin-Ecg-Detectors:0.0.3'
 	}
 
 ```
@@ -71,7 +71,7 @@
 	<dependency>
 	    <groupId>com.github.Creative-Motion-Apps</groupId>
 	    <artifactId>Kotlin-Ecg-Detectors</artifactId>
-	    <version>0.0.2</version>
+	    <version>0.0.3</version>
 	</dependency>
 ```
 

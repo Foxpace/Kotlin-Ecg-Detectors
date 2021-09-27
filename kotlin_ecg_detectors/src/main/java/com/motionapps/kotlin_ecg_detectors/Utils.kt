@@ -1,6 +1,6 @@
 package com.motionapps.kotlin_ecg_detectors
 
-import com.github.psambit9791.jdsp.UtilMethods
+import com.github.psambit9791.jdsp.misc.UtilMethods
 import com.github.psambit9791.jdsp.signal.Convolution
 import java.util.*
 import kotlin.collections.ArrayList
@@ -16,7 +16,13 @@ object Utils {
 
     fun searchForMaximumInRange(doubleArray: DoubleArray, from: Int, to: Int): Double {
         var value = Double.NEGATIVE_INFINITY
-        for (i in from..to) {
+
+        var f = from
+        var t = to
+        if(f < 0) f = 0
+        if(t >= doubleArray.size) t = doubleArray.size - 1
+
+        for (i in f..t) {
             if (doubleArray[i] > value) {
                 value = doubleArray[i]
             }
@@ -26,7 +32,13 @@ object Utils {
 
     fun searchForMaximumInRangeArray(doubleArray: ArrayList<Double>, from: Int, to: Int): Double {
         var value = Double.NEGATIVE_INFINITY
-        for (i in from..to) {
+
+        var f = from
+        var t = to
+        if(f < 0) f = 0
+        if(t >= doubleArray.size) t = doubleArray.size - 1
+
+        for (i in f..t) {
             if (doubleArray[i] > value) {
                 value = doubleArray[i]
             }
@@ -61,7 +73,13 @@ object Utils {
 
 
     fun addingZeros(array: DoubleArray, begin: Int, end: Int) {
-        for (i in begin..end) {
+        var b = begin
+        var e = end
+
+        if(b < 0) b = 0
+        if(e >= array.size) e = array.size - 1
+
+        for (i in b..e) {
             array[i] = 0.0
         }
     }
